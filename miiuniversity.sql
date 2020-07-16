@@ -23,8 +23,9 @@ DROP TABLE IF EXISTS `fakultas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fakultas` (
+  `id` varchar(5) NOT NULL,
   `nama` varchar(35) NOT NULL,
-  PRIMARY KEY (`nama`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -34,6 +35,7 @@ CREATE TABLE `fakultas` (
 
 LOCK TABLES `fakultas` WRITE;
 /*!40000 ALTER TABLE `fakultas` DISABLE KEYS */;
+INSERT INTO `fakultas` VALUES ('EB','Ekonomi dan Bisnis'),('HK','Hukum'),('IB','Ilmu Budaya'),('PS','Psikologi'),('TK','Teknik');
 /*!40000 ALTER TABLE `fakultas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -45,9 +47,9 @@ DROP TABLE IF EXISTS `jurusan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jurusan` (
+  `id` varchar(35) NOT NULL,
   `nama` varchar(45) NOT NULL,
-  `fakultas` varchar(35) DEFAULT NULL,
-  PRIMARY KEY (`nama`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,4 +98,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-16 14:22:49
+-- Dump completed on 2020-07-16 21:02:23
