@@ -19,52 +19,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Laila
+ * @author Gin
  */
 @Entity
 @Table(name = "siswa")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Siswa.findAll", query = "SELECT s FROM Siswa s")
-    , @NamedQuery(name = "Siswa.findByIdPendaftaran", query = "SELECT s FROM Siswa s WHERE s.idPendaftaran = :idPendaftaran")
+    , @NamedQuery(name = "Siswa.findById", query = "SELECT s FROM Siswa s WHERE s.id = :id")
     , @NamedQuery(name = "Siswa.findByNis", query = "SELECT s FROM Siswa s WHERE s.nis = :nis")
     , @NamedQuery(name = "Siswa.findByNama", query = "SELECT s FROM Siswa s WHERE s.nama = :nama")
-    , @NamedQuery(name = "Siswa.findByAsalSekolah", query = "SELECT s FROM Siswa s WHERE s.asalSekolah = :asalSekolah")
+    , @NamedQuery(name = "Siswa.findByAsal", query = "SELECT s FROM Siswa s WHERE s.asal = :asal")
     , @NamedQuery(name = "Siswa.findByJurusan", query = "SELECT s FROM Siswa s WHERE s.jurusan = :jurusan")})
 public class Siswa implements Serializable {
-
-    @Size(max = 45)
-    @Column(name = "nama")
-    private String nama;
-    @Size(max = 45)
-    @Column(name = "asalSekolah")
-    private String asalSekolah;
-    @Size(max = 45)
-    @Column(name = "jurusan")
-    private String jurusan;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idPendaftaran")
-    private Integer idPendaftaran;
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "nis")
     private Integer nis;
+    @Size(max = 45)
+    @Column(name = "nama")
+    private String nama;
+    @Size(max = 45)
+    @Column(name = "asal")
+    private String asal;
+    @Size(max = 45)
+    @Column(name = "jurusan")
+    private String jurusan;
 
     public Siswa() {
     }
 
-    public Siswa(Integer idPendaftaran) {
-        this.idPendaftaran = idPendaftaran;
+    public Siswa(Integer id) {
+        this.id = id;
     }
 
-    public Integer getIdPendaftaran() {
-        return idPendaftaran;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdPendaftaran(Integer idPendaftaran) {
-        this.idPendaftaran = idPendaftaran;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getNis() {
@@ -75,11 +74,34 @@ public class Siswa implements Serializable {
         this.nis = nis;
     }
 
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getAsal() {
+        return asal;
+    }
+
+    public void setAsal(String asal) {
+        this.asal = asal;
+    }
+
+    public String getJurusan() {
+        return jurusan;
+    }
+
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPendaftaran != null ? idPendaftaran.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -90,7 +112,7 @@ public class Siswa implements Serializable {
             return false;
         }
         Siswa other = (Siswa) object;
-        if ((this.idPendaftaran == null && other.idPendaftaran != null) || (this.idPendaftaran != null && !this.idPendaftaran.equals(other.idPendaftaran))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -98,31 +120,7 @@ public class Siswa implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mcc.MIIUniversity.entities.Siswa[ idPendaftaran=" + idPendaftaran + " ]";
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public String getAsalSekolah() {
-        return asalSekolah;
-    }
-
-    public void setAsalSekolah(String asalSekolah) {
-        this.asalSekolah = asalSekolah;
-    }
-
-    public String getJurusan() {
-        return jurusan;
-    }
-
-    public void setJurusan(String jurusan) {
-        this.jurusan = jurusan;
+        return "com.mcc.MIIUniversity.entities.Siswa[ id=" + id + " ]";
     }
     
 }
