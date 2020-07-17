@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FakultasController {
     @Autowired
     FakultasService fakultasService;
-    FakultasService fakultasService1;
+    
     
 @Autowired
     FakultasRepository fakultasRepository;
@@ -48,16 +48,16 @@ public String save(@Valid Fakultas fakultas){
     
 }
 
-@PostMapping("/update")
-public String save(@RequestParam ("id") String id, @Valid Fakultas fakultas, BindingResult result, Model model){
-    if(result.hasErrors()){
-        fakultas.setId(id);
-        return "index";
-    }
-    fakultasRepository.save(fakultas);
-    model.addAttribute("fakultas", fakultas);
-    return "index";
-        
+//@PostMapping("/update")
+//public String save(@RequestParam ("id") String id, @Valid Fakultas fakultas, BindingResult result, Model model){
+//    if(result.hasErrors()){
+//        fakultas.setId(id);
+//        return "index";
+//    }
+//    fakultasRepository.save(fakultas);
+//    model.addAttribute("fakultas", fakultas);
+//    return "index";
+//        
 //         .orElseThrow(() - > new IllegalArgumentException("Invalid Fakultas ID:"+id));
 // model.addAttribute("fakultas", fakultas);
 //    fakultasService.save(fakultas);
@@ -65,7 +65,7 @@ public String save(@RequestParam ("id") String id, @Valid Fakultas fakultas, Bin
 //    return "redirect:/";
 //    
     
-}
+//}
 
 @RequestMapping("/delete/{id}")
 public String delete(@PathVariable String id){
