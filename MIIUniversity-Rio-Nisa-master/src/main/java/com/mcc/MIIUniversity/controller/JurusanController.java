@@ -43,27 +43,8 @@ public String save(@Valid Jurusan jurusan){
     
     return "redirect:/jurusan/";
     
-    
 }
 
-//@PostMapping("/update")
-//public String save(@RequestParam ("id") String id, @Valid Jurusan jurusan, BindingResult result, Model model){
-//    if(result.hasErrors()){
-//        jurusan.setId(id);
-//        return "index";
-//    }
-//    jurusanRepository.save(jurusan);
-//    model.addAttribute("jurusan", jurusan);
-//    return "index";
-//        
-//         .orElseThrow(() - > new IllegalArgumentException("Invalid Jurusan ID:"+id));
-// model.addAttribute("jurusan", jurusan);
-//    jurusanService.save(jurusan);
-//    
-//    return "redirect:/";
-//    
-    
-//}
 
 @RequestMapping("/jurusandelete/{id}")
 public String delete(@PathVariable String id){
@@ -75,35 +56,6 @@ public String delete(@PathVariable String id){
 public String getById(Model model, @PathVariable("nama") String nama){
 model.addAttribute("jurusan", jurusanService.getById(nama));
 model.addAttribute("jurusans", jurusanService.getAll());
-//    Optional<Jurusan> jurusan= jurusanRepository.findAllById(id);
-//jurusan.addAttribute("jurusan", new Jurusan()); 
-//return jurusanService.getById(id);
      return "index";
-    
-//    if (jurusan.isPresent()) {
-//      return new ResponseEntity<>(jurusan.get(), HttpStatus.OK);
-//    } else {
-//      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
   }
-
-//@RequestMapping("/search")
-//public String viewHomePage(Model model){
-//String keyword="a";
-//    List<Jurusan> listJurusans= jurusanService.listAll(keyword);
-//    model.addAttribute("listJurusans", listJurusans);
-////    model.addAttribute("keyword", keyword);
-//    return "index";
-//}
-
-//@GetMapping("/search")
-//public String search (Model model, @RequestParam String keyword){
-//        List<Jurusan> jurusans = (List<Jurusan>) jurusanRepository.search(keyword);
-//    model.addAttribute("jurusans", jurusans);
-//    return "showSearch";
-//}
-
 }
-
-   
-
