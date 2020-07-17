@@ -19,10 +19,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FakultasRepository extends JpaRepository<Fakultas, String>{
    
-//since we dont need search, so lets just comment it
-//    @Query("SELECT f FROM Fakultas f WHERE f.name like %?1%")
-//    public List<Fakultas> search(String keyword);
-// 
-//}
     
 }

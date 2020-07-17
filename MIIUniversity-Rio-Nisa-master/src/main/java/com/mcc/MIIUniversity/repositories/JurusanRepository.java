@@ -18,9 +18,5 @@ import org.springframework.stereotype.Repository;
     @Repository
 public interface JurusanRepository extends JpaRepository<Jurusan, String>{
    
-//    @Query("SELECT r FROM Region r WHERE r.name like %?1% or r.id like %?1% ")
-//    public List<Region> search(String keyword);
-//List<Region> findAllWithId(Specification<Region> spec);    
-//}
 
 }
