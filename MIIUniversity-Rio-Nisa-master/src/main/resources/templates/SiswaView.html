@@ -12,7 +12,6 @@ and open the template in the editor.
         <!-- CDN LInk -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"> 
-        <!-- Internal CSS Style -->
         <style>
             .footer{
                 width: 100%;
@@ -59,7 +58,8 @@ and open the template in the editor.
         <br>
         <div align="right" class="container">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new">
+            <button class="btn btn-secondary open-new" 
+                                    href="#new" data-toggle="modal">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
                 </svg>
@@ -91,13 +91,15 @@ and open the template in the editor.
                                     th:data-nama="${ps.nama}" th:data-asal="${ps.asal}" th:data-jurusan="${ps.jurusan}">
                                 <i class="fa fa-pencil"></i>Edit
                             </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete" onclick="deleteArlet('+${ps.nama}+')">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                 </svg>
                                 Delete
                             </button>
+                        
+                        <a th:href="@{'/siswa/delete/' + ${ps.id}}" onclick="deleteArlet('+${ps.nama}+')" >Delete</a>
                         </div></td>
                 </div>     
                 </tr>
@@ -149,7 +151,7 @@ and open the template in the editor.
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form th:action="@{/siswa/save}" th:object="${siswa}" method="POST" > 
+                            <form th:action="@{/siswa/save}" th:object="${siswa}" method="POST" name="myForm"> 
                                 <label> ID Pendaftaran  : </label>
                                 <input type="number" id="txtId" class="form-control"  th:field="*{id}" readonly>
                                 <label> Nis  : </label>
@@ -164,12 +166,12 @@ and open the template in the editor.
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
-                                    <input type="submit" value="Save" class="btn btn-primary"  > 
+                                    <input type="submit" value="Save" class="btn btn-primary " onclick="validateForm()"  > 
                                     </form>
                                 </div>
                         </div>
                     </div>
-                </div>
+                </div></div>
 
 
 
@@ -194,6 +196,22 @@ and open the template in the editor.
                     $('#datdatble').DataTable();
                     } );
                 </script>
+                
+                <script>
+                    $(document).on("click", ".open-new", function () {
+                    var ids = null;
+                    var niss = null;
+                    var namas = null;
+                    var asals = null;
+                    var jurusans = $(this).data('jurusan'); 
+                    $(".modal-body #txtId").val( ids );
+                    $(".modal-body #txtNis").val( niss );
+                    $(".modal-body #txtNama").val( namas );
+                    $(".modal-body #txtAsal").val( asals );
+                    $(".modal-body #txtJurusan").val( jurusans );
+                    $('#new').modal('show');
+                    });
+                </script>
 
                 <script>
                     $(document).on("click", ".open-update", function () {
@@ -212,7 +230,7 @@ and open the template in the editor.
                 </script>
 
                 <script>
-                    function deleteArlet(){
+                    function deleteArlet(id){
                     Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -222,15 +240,105 @@ and open the template in the editor.
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
-                    if (result.value) {
-                    Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    )
+                        if (result.value) { 
+                            Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
                     }
                     })
                     }
+                </script>
+                <script>
+                    function Delete(Id) {
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "You won't be able to revert this!",
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            //debugger;
+                            if (result.value) {
+                                $.ajax({
+                                    url: "/siswa/delete/"+ Id,
+                                    data: { Id: Id }
+                                }).then((result) => {
+                                    if (result.statusCode === 200) {
+                                        Swal.fire({
+                                            position: 'center',
+                                            type: 'success',
+                                            title: 'Department Deleted Succesfully'
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                //table.ajax.reload();
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        Swal.fire('Error', 'Failed to Delete Department', 'error');
+                                        //ShowModal();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                </script>
+                
+                <script>
+                    function archiveFunction() {
+                        event.preventDefault(); // prevent form submit
+                        var form = event.target.form; // storing the form
+                        swal({
+                          title: "Are you sure?",
+                          text: "But you will still be able to retrieve this file.",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Yes, archive it!",
+                          cancelButtonText: "No, cancel please!",
+                          closeOnConfirm: false,
+                          closeOnCancel: false
+                        },
+                        function(isConfirm){
+                          if (isConfirm) {
+                            form.submit();          // submitting the form when user press yes
+                          } else {
+                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                          }
+                        });
+                        }
+                </script>
+                <script>
+                    function sukes(){
+                        Swal.fire(
+                            'Good job!',
+                            'You clicked the button!',
+                            'success'
+                          )
+                    }
+                </script>
+                <script>
+                    function validateForm() {
+                        event.preventDefault(); // prevent form submit
+                        var form = document.forms["myForm"]; // storing the form
+                        swal({
+                               title: "Are you sure?",
+                               text: "Once deleted, you will not be able to recover this imaginary file!",
+                               icon: "warning",
+                               buttons: true,
+                               dangerMode: true,
+                             })
+                            .then((willDelete) => {
+                                 if (willDelete) {
+                                       form.submit();
+                                 } else {
+                                        swal("Your imaginary file is safe!");
+                             }
+                          });
+                  }
                 </script>
 
                 </body>

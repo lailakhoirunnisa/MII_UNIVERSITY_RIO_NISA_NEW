@@ -8,6 +8,7 @@ public class MiiUniversityApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MiiUniversityApplication.class, args);
+                System.out.println("Web is Running");
 	}
 
 }
