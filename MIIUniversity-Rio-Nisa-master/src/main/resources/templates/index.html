@@ -121,7 +121,7 @@ and open the template in the editor.
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type ="submit" value="Save"  class="btn btn-primary">Save changes</button>
+                                        <button type ="submit" value="Save"  class="btn btn-primary" onclick="swal02()">Save changes</button>
                                     </div>
                                     </form>
                                 </div>
@@ -161,7 +161,7 @@ and open the template in the editor.
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type ="submit" value="Save"  class="btn btn-primary">Save changes</button>
+                                        <button type ="submit" value="Save"  class="btn btn-primary" onclick="swal02()">Save changes</button>
                                     </div>
                                     </form>
                                 </div>
@@ -226,6 +226,16 @@ and open the template in the editor.
                 <script
 
             </script>
+             <script>
+                function swal02(){
+                Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Your data has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})}
+                </script>
             <script>
 
             </script>

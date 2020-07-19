@@ -134,7 +134,7 @@ and open the template in the editor.
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
-                                <input type="submit" value="Save" class="btn btn-primary"  > 
+                                <input type="submit" value="Save" class="btn btn-primary" onclick="saveswal()"  > 
                                 </form>
                             </div>
                     </div>
@@ -166,7 +166,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
-                                    <input type="submit" value="Save" class="btn btn-primary " onclick="validateForm()"  > 
+                                    <input type="submit" value="Save" class="btn btn-primary " onclick="saveswal()"  > 
                                     </form>
                                 </div>
                         </div>
@@ -228,7 +228,16 @@ and open the template in the editor.
                     $('#update').modal('show');
                     });
                 </script>
-
+<script>
+                function saveswal(){
+                Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Your data has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})}
+                </script>
                 <script>
                     function deleteArlet(id){
                     Swal.fire({
